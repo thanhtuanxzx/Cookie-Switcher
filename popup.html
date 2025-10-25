@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cookie Switcher</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Bổ sung style riêng cho phần tác giả */
+    .author-info {
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      border: 1px solid #b2ebf2;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .author-info h3 {
+      margin: 5px 0;
+      color: #00695c;
+      font-size: 16px;
+    }
+
+    .author-info a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .author-info a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #555;
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+    }
+
+    footer a {
+      color: #0073e6;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🟢 Cookie Switcher</h1>
+
+  <!-- Phần thông tin tác giả -->
+  <div class="author-info">
+    <h3>👨‍💻 Tác giả: <a href="https://github.com/thanhtuanxzx" target="_blank">Thanhtuanxzx</a></h3>
+    <p>Facebook: <a href="https://www.facebook.com/nguyen.thanh.tuan.945489" target="_blank">Nguyễn Thành Tuấn</a></p>
+  </div>
+
+  <div id="cookie-list">Đang tải cookie...</div>
+
+  <div class="section">
+    <input id="profile-name" type="text" placeholder="Nhập tên tài khoản..." />
+    <button id="save-profile">💾 Lưu Cookie</button>
+  </div>
+
+  <div class="section">
+    <h3>🔀 Chuyển tài khoản</h3>
+    <div id="profile-buttons"></div>
+  </div>
+
+  <div class="section">
+    <h3>🧹 Xóa hồ sơ</h3>
+    <button id="clear-profiles" class="delete-btn">🗑️ Xóa tất cả tài khoản đã lưu</button>
+  </div>
+
+  <div class="section">
+    <h3>📁 Xuất / Nhập Cookie</h3>
+    <button id="export-cookies">📄 Xuất Cookie (.json)</button>
+    <input type="file" id="import-file" accept=".json" />
+    <button id="import-cookies">📂 Nhập Cookie</button>
+  </div>
+
+  <footer>
+    © 2025 <a href="https://github.com/thanhtuanxzx" target="_blank">Thanhtuanxzx</a> | Liên hệ qua 
+    <a href="https://www.facebook.com/nguyen.thanh.tuan.945489" target="_blank">Facebook</a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

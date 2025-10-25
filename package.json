@@ -1,0 +1,83 @@
+{
+  "name": "cookie-switcher",
+  "version": "1.0.0",
+  "description": "Chrome extension để chuyển đổi giữa các tài khoản bằng cách lưu và áp dụng cookie đã lưu",
+  "main": "popup.js",
+  "scripts": {
+    "build": "echo 'No build process needed for this extension'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'",
+    "package": "zip -r cookie-switcher-v1.0.0.zip . -x '*.git*' 'node_modules/*' '*.zip' 'package*.json' 'README.md' 'CONTRIBUTING.md' 'CHANGELOG.md' '.gitignore'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhtuanxzx/Cookie-Switcher.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "cookie-manager",
+    "account-switcher",
+    "javascript",
+    "manifest-v3",
+    "privacy-focused",
+    "open-source",
+    "browser-extension",
+    "cookie-switcher",
+    "multi-account"
+  ],
+  "author": {
+    "name": "Thanhtuanxzx",
+    "email": "contact@thanhtuanxzx.dev",
+    "url": "https://github.com/thanhtuanxzx"
+  },
+  "contributors": [
+    {
+      "name": "Thanhtuanxzx",
+      "email": "contact@thanhtuanxzx.dev",
+      "url": "https://github.com/thanhtuanxzx"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thanhtuanxzx/Cookie-Switcher/issues"
+  },
+  "homepage": "https://github.com/thanhtuanxzx/Cookie-Switcher#readme",
+  "engines": {
+    "chrome": ">=88.0.0"
+  },
+  "manifest": {
+    "version": 3,
+    "permissions": [
+      "cookies",
+      "storage",
+      "tabs",
+      "activeTab",
+      "scripting"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ]
+  },
+  "files": [
+    "manifest.json",
+    "popup.html",
+    "popup.js",
+    "background.js",
+    "styles.css",
+    "icon.png",
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {},
+  "dependencies": {},
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/thanhtuanxzx"
+  },
+  "social": {
+    "github": "https://github.com/thanhtuanxzx",
+    "facebook": "https://www.facebook.com/nguyen.thanh.tuan.945489"
+  }
+}
