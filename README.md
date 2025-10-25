@@ -188,10 +188,11 @@ Cookie Switcher cam kết bảo vệ quyền riêng tư của người dùng:
 
 ## 📊 Thống kê
 
-![GitHub stars](https://img.shields.io/github/stars/thanhtuanxzx/Cookie-Switcher?style=social)
-![GitHub forks](https://img.shields.io/github/forks/thanhtuanxzx/Cookie-Switcher?style=social)
-![GitHub issues](https://img.shields.io/github/issues/thanhtuanxzx/Cookie-Switcher)
-![GitHub license](https://img.shields.io/github/license/thanhtuanxzx/Cookie-Switcher)
+![GitHub stars](https://img.shields.io/github/stars/thanhtuanxzx/Cookie-Switcher?style=social&cacheSeconds=300)
+![GitHub forks](https://img.shields.io/github/forks/thanhtuanxzx/Cookie-Switcher?style=social&cacheSeconds=300)
+![GitHub issues](https://img.shields.io/github/issues/thanhtuanxzx/Cookie-Switcher?cacheSeconds=300)
+![GitHub license](https://img.shields.io/github/license/thanhtuanxzx/Cookie-Switcher?cacheSeconds=300)
+
 
 ## 🎉 Cảm ơn
 
