@@ -1,6 +1,11 @@
-import connectDB from '../../lib/db.js';
-import SharedCookie from '../../lib/cookieModel.js';
+import connectDB from '../../../lib/db.js';
+import SharedCookie from '../../../lib/cookieModel.js';
 
+/**
+ * Next.js API Route: Save/Update Profile in Group
+ * POST /api/groups/save
+ * Body: { groupId: string, profileName: string, cookies: Array }
+ */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ 

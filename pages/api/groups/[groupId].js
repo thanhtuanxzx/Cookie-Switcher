@@ -1,6 +1,11 @@
-import connectDB from '../../lib/db.js';
-import SharedCookie from '../../lib/cookieModel.js';
+import connectDB from '../../../lib/db.js';
+import SharedCookie from '../../../lib/cookieModel.js';
 
+/**
+ * Next.js API Route: Get Group Profiles (Dynamic Route)
+ * GET /api/groups/[groupId]
+ * Next.js automatically provides groupId in req.query
+ */
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ 
@@ -10,11 +15,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse groupId from URL path
-    // URL format: /api/groups/[groupId]
-    const urlPath = req.url || '';
-    const pathMatch = urlPath.match(/\/api\/groups\/([^/?]+)/);
-    const groupId = pathMatch ? pathMatch[1] : (req.query?.groupId || null);
+    // Next.js automatically parses dynamic route params into req.query
+    const { groupId } = req.query;
 
     if (!groupId) {
       return res.status(400).json({

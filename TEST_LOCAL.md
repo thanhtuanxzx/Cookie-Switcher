@@ -34,10 +34,10 @@ npm run dev
 Hoặc:
 
 ```bash
-node server.js
+next dev
 ```
 
-Server sẽ chạy tại: `http://localhost:3000`
+Server sẽ chạy tại: `http://localhost:3000` (Next.js default port)
 
 ### 4. Test các endpoints
 
@@ -150,7 +150,7 @@ Kết quả mong đợi:
 
 **Lưu ý**: Chrome extension có thể chặn HTTP (không phải HTTPS). Nếu gặp lỗi CORS hoặc mixed content:
 - Thử dùng `http://127.0.0.1:3000` thay vì `http://localhost:3000`
-- Hoặc cấu hình CORS trong server.js (đã có sẵn)
+- Next.js API routes tự động xử lý CORS cho development
 
 ## 🐛 Troubleshooting
 
@@ -172,7 +172,8 @@ Access to fetch at 'http://localhost:3000' from origin 'chrome-extension://...' 
 ```
 
 **Giải pháp**:
-- Server đã có CORS middleware, đảm bảo server đang chạy
+- Next.js API routes tự động xử lý CORS trong development mode
+- Đảm bảo Next.js dev server đang chạy (`npm run dev`)
 - Thử dùng `http://127.0.0.1:3000` thay vì `localhost`
 
 ### Port đã được sử dụng
@@ -195,6 +196,7 @@ Error: listen EADDRINUSE: address already in use :::3000
 
 ## 📝 Notes
 
+- Backend sử dụng Next.js API Routes
 - Server local chỉ dùng để test, không dùng cho production
 - Đảm bảo MongoDB connection string đúng
 - Có thể test với nhiều group ID khác nhau

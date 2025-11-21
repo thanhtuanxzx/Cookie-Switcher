@@ -1,9 +1,9 @@
-import connectDB from '../../lib/db.js';
-import SharedCookie from '../../lib/cookieModel.js';
+import connectDB from '../../../lib/db.js';
+import SharedCookie from '../../../lib/cookieModel.js';
 
 /**
- * API endpoint để xóa (unshare) một profile khỏi group
- * Method: POST
+ * Next.js API Route: Remove Profile from Group (Unshare)
+ * POST /api/groups/removeProfile
  * Body: { groupId: string, profileName: string }
  */
 export default async function handler(req, res) {
