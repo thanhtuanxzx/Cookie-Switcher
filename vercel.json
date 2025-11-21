@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/api/groups/([^/]+)",
+      "dest": "/api/groups/[groupId].js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }
