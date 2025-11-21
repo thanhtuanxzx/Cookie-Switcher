@@ -1,0 +1,181 @@
+body {
+  font-family: Arial, sans-serif;
+  width: 320px;
+  padding: 15px;
+  background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
+  color: #333;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+input, button {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Profile Row */
+.profile-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  align-items: center;
+}
+
+/* Local Profile Row */
+.local-profile-row {
+  background: #f5f5f5;
+  padding: 8px;
+  border-radius: 6px;
+  border-left: 3px solid #4CAF50;
+}
+
+/* Shared Profile Row */
+.shared-profile-row {
+  background: #e3f2fd;
+  padding: 8px;
+  border-radius: 6px;
+  border-left: 3px solid #2196F3;
+}
+
+/* Apply Button */
+.apply-btn {
+  background-color: #2196F3;
+  color: white;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.apply-btn:hover {
+  background-color: #1e88e5;
+}
+
+/* Share Button (màu xanh dương) */
+.share-btn {
+  background-color: #1976D2;
+  color: white;
+  font-size: 12px;
+  padding: 6px 8px;
+  flex: 0 0 80px;
+}
+
+.share-btn:hover {
+  background-color: #1565C0;
+}
+
+/* Unshare Button (màu đỏ nhạt) */
+.unshare-btn {
+  background-color: #ef5350;
+  color: white;
+  font-size: 12px;
+  padding: 6px 8px;
+  flex: 0 0 80px;
+}
+
+.unshare-btn:hover {
+  background-color: #e53935;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e53935;
+  color: white;
+  flex: 0 0 40px;
+  padding: 6px;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Section Styles */
+.section {
+  margin-top: 15px;
+}
+
+/* Local Section */
+.local-section {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.local-section h3 {
+  color: #4CAF50;
+  border-bottom-color: #4CAF50;
+}
+
+/* Shared Section */
+.shared-section {
+  background: #e8f4f8;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #b3e5fc;
+}
+
+.shared-section h3 {
+  color: #2196F3;
+  border-bottom-color: #2196F3;
+}
+
+/* Cookie List */
+#cookie-list {
+  max-height: 140px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* Profile Buttons Container */
+#local-profiles,
+#shared-profiles {
+  margin-top: 10px;
+}
+
+#local-profiles i,
+#shared-profiles i {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  color: #999;
+}
+
+/* Group Status */
+#group-status {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  margin-top: 6px;
+}

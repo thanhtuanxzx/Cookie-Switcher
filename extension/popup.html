@@ -59,23 +59,47 @@
     <p>Facebook: <a href="https://www.facebook.com/nguyen.thanh.tuan.945489" target="_blank">Nguyễn Thành Tuấn</a></p>
   </div>
 
-  <div id="cookie-list">Đang tải cookie...</div>
-
+  <!-- Current Domain Cookies -->
   <div class="section">
+    <h3>🍪 Current Domain Cookies</h3>
+    <div id="cookie-list">Đang tải cookie...</div>
+  </div>
+
+  <!-- Save Profile -->
+  <div class="section">
+    <h3>💾 Lưu Profile</h3>
     <input id="profile-name" type="text" placeholder="Nhập tên tài khoản..." />
     <button id="save-profile">💾 Lưu Cookie</button>
   </div>
 
-  <div class="section">
-    <h3>🔀 Chuyển tài khoản</h3>
-    <div id="profile-buttons"></div>
+  <!-- Local Profiles Section -->
+  <div class="section local-section">
+    <h3>📁 Local Profiles</h3>
+    <div id="local-profiles"></div>
   </div>
 
+  <!-- Shared Group Section -->
+  <div class="section shared-section">
+    <h3>👥 Shared Group</h3>
+    <input id="group-id" type="text" placeholder="Nhập Group ID (vd: team-marketing)" />
+    <div style="display: flex; gap: 6px; margin-top: 6px;">
+      <button id="join-group" style="flex: 1;">🔗 Tham gia Group</button>
+      <button id="leave-group" style="flex: 1;">🚪 Rời Group</button>
+    </div>
+    <div style="display: flex; gap: 6px; margin-top: 6px;">
+      <button id="sync-group" style="flex: 1;">🔄 Đồng bộ</button>
+    </div>
+    <div id="group-status" style="margin-top: 6px; font-size: 12px; color: #666;"></div>
+    <div id="shared-profiles" style="margin-top: 10px;"></div>
+  </div>
+
+  <!-- Clear Profiles -->
   <div class="section">
     <h3>🧹 Xóa hồ sơ</h3>
     <button id="clear-profiles" class="delete-btn">🗑️ Xóa tất cả tài khoản đã lưu</button>
   </div>
 
+  <!-- Export/Import -->
   <div class="section">
     <h3>📁 Xuất / Nhập Cookie</h3>
     <button id="export-cookies">📄 Xuất Cookie (.json)</button>
