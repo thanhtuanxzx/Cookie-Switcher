@@ -1,6 +1,6 @@
 // ========== CONFIGURATION ==========
 // Cấu hình API URL tại đây
-const API_BASE_URL = 'http://localhost:3000'; // Thay đổi URL này thành API URL của bạn
+const API_BASE_URL = 'https://cookie-switcher.vercel.app'; // Thay đổi URL này thành API URL của bạn
 
 // ========== END CONFIGURATION ==========
 
