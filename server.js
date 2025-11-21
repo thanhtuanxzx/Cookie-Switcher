@@ -23,7 +23,7 @@ app.use(express.json());
 // Import handlers
 import healthHandler from './api/health.js';
 import saveHandler from './api/groups/save.js';
-import getGroupHandler from './api/groups/[groupId].js';
+import getGroupHandler from './api/groups/getGroup.js';
 import removeProfileHandler from './api/groups/removeProfile.js';
 
 // Wrapper để convert Vercel handler format sang Express

@@ -8,8 +8,16 @@
   ],
   "routes": [
     {
-      "src": "/api/groups/([^/]+)",
-      "dest": "/api/groups/[groupId].js"
+      "src": "/api/groups/save",
+      "dest": "/api/groups/save.js"
+    },
+    {
+      "src": "/api/groups/removeProfile",
+      "dest": "/api/groups/removeProfile.js"
+    },
+    {
+      "src": "/api/groups/([^/]+)$",
+      "dest": "/api/groups/getGroup.js"
     },
     {
       "src": "/api/(.*)",
