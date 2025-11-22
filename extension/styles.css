@@ -1,9 +1,12 @@
 body {
   font-family: Arial, sans-serif;
   width: 320px;
+  max-width: 320px;
   padding: 15px;
   background: linear-gradient(to bottom, #fdfdfd, #f0f4f8);
   color: #333;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -22,12 +25,15 @@ h3 {
 
 input, button {
   width: 100%;
+  max-width: 100%;
   padding: 8px;
   font-size: 14px;
   margin: 6px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 button {
@@ -48,6 +54,9 @@ button:hover {
   gap: 6px;
   margin-bottom: 6px;
   align-items: center;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Local Profile Row */
@@ -56,6 +65,9 @@ button:hover {
   padding: 8px;
   border-radius: 6px;
   border-left: 3px solid #4CAF50;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* Shared Profile Row */
@@ -64,6 +76,9 @@ button:hover {
   padding: 8px;
   border-radius: 6px;
   border-left: 3px solid #2196F3;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* Apply Button */
@@ -72,6 +87,11 @@ button:hover {
   color: white;
   margin-bottom: 0;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 8px 6px;
 }
 
 .apply-btn:hover {
@@ -119,6 +139,9 @@ button:hover {
 /* Section Styles */
 .section {
   margin-top: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* Local Section */
@@ -127,6 +150,9 @@ button:hover {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .local-section h3 {
@@ -140,6 +166,9 @@ button:hover {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #b3e5fc;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .shared-section h3 {
@@ -151,17 +180,43 @@ button:hover {
 #cookie-list {
   max-height: 140px;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 10px;
   font-size: 13px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#cookie-list div {
+  margin-bottom: 6px;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+#cookie-list strong {
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-all;
 }
 
 /* Profile Buttons Container */
 #local-profiles,
 #shared-profiles {
   margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Ensure inline flex containers don't overflow */
+[style*="display: flex"] {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 #local-profiles i,
@@ -178,4 +233,21 @@ button:hover {
   color: #666;
   font-style: italic;
   margin-top: 6px;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Ensure all elements respect container width */
+html {
+  overflow-x: hidden;
+  width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+
+/* Prevent overflow for common elements */
+div, p, span, a {
+  max-width: 100%;
+  box-sizing: border-box;
 }
