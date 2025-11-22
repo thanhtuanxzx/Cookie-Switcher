@@ -453,12 +453,94 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   /**
    * Apply cookies (dùng chung cho cả local và shared)
+   * - Nếu domain cookies giống domain hiện tại: apply vào tab hiện tại và reload
+   * - Nếu domain cookies khác domain hiện tại: mở tab mới, apply cookies, và reload tab mới
    */
   async function applyCookies(cookiesToApply, profileName) {
     try {
-      // Xóa tất cả cookie hiện tại của domain
-      const current = await chrome.cookies.getAll({ url: domain });
-      await Promise.all(current.map(c => chrome.cookies.remove({ url: domain, name: c.name })));
+      if (!cookiesToApply || cookiesToApply.length === 0) {
+        return alert('Không có cookies để áp dụng');
+      }
+
+      // Xác định domain của cookies từ cookie đầu tiên
+      const firstCookie = cookiesToApply[0];
+      let cookieDomain = firstCookie.domain;
+      
+      // Normalize domain: loại bỏ dấu chấm đầu nếu có (ví dụ: ".example.com" -> "example.com")
+      if (cookieDomain.startsWith('.')) {
+        cookieDomain = cookieDomain.substring(1);
+      }
+
+      // Tạo URL từ domain (giả định https)
+      const cookieUrl = `https://${cookieDomain}`;
+      const cookieHostname = cookieDomain.toLowerCase();
+
+      // Lấy domain hiện tại từ tab
+      const currentHostname = url.hostname.toLowerCase();
+
+      // Hàm helper để lấy base domain (loại bỏ subdomain)
+      // Ví dụ: "www.facebook.com" -> "facebook.com", "facebook.com" -> "facebook.com"
+      function getBaseDomain(hostname) {
+        const parts = hostname.split('.');
+        // Nếu có ít nhất 2 phần, lấy 2 phần cuối (ví dụ: "facebook.com")
+        // Nếu có nhiều hơn 2 phần, có thể là subdomain (ví dụ: "www.facebook.com" -> "facebook.com")
+        if (parts.length >= 2) {
+          return parts.slice(-2).join('.');
+        }
+        return hostname;
+      }
+
+      const cookieBaseDomain = getBaseDomain(cookieHostname);
+      const currentBaseDomain = getBaseDomain(currentHostname);
+
+      // So sánh base domain: nếu base domain giống nhau thì coi là cùng domain
+      // Ví dụ: "www.facebook.com" và "facebook.com" đều có base domain là "facebook.com"
+      const isSameDomain = cookieBaseDomain === currentBaseDomain;
+
+      let targetTab = tab;
+      let targetDomain = domain;
+
+      if (isSameDomain) {
+        // Ví dụ 1: Domain giống nhau - Apply vào tab hiện tại
+        targetTab = tab;
+        targetDomain = domain;
+      } else {
+        // Ví dụ 2: Domain khác nhau - Mở tab mới
+        const newTab = await chrome.tabs.create({ url: cookieUrl, active: true });
+        targetTab = newTab;
+        targetDomain = cookieUrl;
+        
+        // Đợi tab mới load xong và navigate đến URL đúng trước khi apply cookies
+        await new Promise((resolve) => {
+          const listener = (tabId, changeInfo, tabInfo) => {
+            if (tabId === newTab.id) {
+              // Kiểm tra xem tab đã navigate đến URL đúng chưa
+              if (changeInfo.status === 'complete' && tabInfo.url && 
+                  (tabInfo.url.startsWith('https://') || tabInfo.url.startsWith('http://'))) {
+                // Đợi thêm một chút để đảm bảo trang đã load hoàn toàn
+                setTimeout(() => {
+                  chrome.tabs.onUpdated.removeListener(listener);
+                  resolve();
+                }, 500);
+                return;
+              }
+            }
+          };
+          chrome.tabs.onUpdated.addListener(listener);
+          
+          // Timeout sau 5 giây nếu tab không load
+          setTimeout(() => {
+            chrome.tabs.onUpdated.removeListener(listener);
+            resolve();
+          }, 5000);
+        });
+      }
+
+      // Xóa tất cả cookie hiện tại của target domain
+      const currentCookies = await chrome.cookies.getAll({ url: targetDomain });
+      await Promise.all(currentCookies.map(c => 
+        chrome.cookies.remove({ url: targetDomain, name: c.name })
+      ));
       
       // Set cookie mới (sanitize)
       for (const c of cookiesToApply) {
@@ -466,13 +548,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           const { hostOnly, session, storeId, sameSite, id, expirationDate, ...sanitized } = c;
           if (expirationDate) sanitized.expirationDate = expirationDate;
           if (sameSite) sanitized.sameSite = sameSite;
-          await chrome.cookies.set({ ...sanitized, url: domain });
+          await chrome.cookies.set({ ...sanitized, url: targetDomain });
         } catch (e) {
           console.warn(`Lỗi khi set cookie ${c.name}:`, e);
         }
       }
+
       alert("Đã chuyển sang tài khoản: " + profileName);
-      chrome.tabs.reload(tab.id);
+      
+      // Reload tab (tab hiện tại hoặc tab mới)
+      chrome.tabs.reload(targetTab.id);
     } catch (error) {
       console.error('Apply cookies error:', error);
       alert('Lỗi khi áp dụng cookie: ' + error.message);
