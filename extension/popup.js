@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  // Load và render recent groups
+  renderRecentGroups();
+
   // Join Group
   document.getElementById('join-group').addEventListener('click', async () => {
     const groupId = document.getElementById('group-id').value.trim();
@@ -38,9 +41,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!apiBaseUrl) return alert('Vui lòng cấu hình API_BASE_URL trong code');
 
     currentGroupId = groupId;
+    // Lưu vào recent groups
+    await addToRecentGroups(groupId);
     chrome.storage.local.set({ currentGroupId }, () => {
       updateGroupStatus('Đã tham gia: ' + groupId);
       syncGroup();
+      renderRecentGroups();
     });
   });
 
@@ -259,6 +265,101 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function updateGroupStatus(message) {
     document.getElementById('group-status').textContent = message;
+  }
+
+  /**
+   * Thêm group vào danh sách recent groups
+   */
+  async function addToRecentGroups(groupId) {
+    return new Promise((resolve) => {
+      chrome.storage.local.get(['recentGroups'], (result) => {
+        let recentGroups = result.recentGroups || [];
+        
+        // Xóa group nếu đã tồn tại (để tránh trùng lặp)
+        recentGroups = recentGroups.filter(g => g.id !== groupId);
+        
+        // Thêm group mới vào đầu danh sách
+        recentGroups.unshift({
+          id: groupId,
+          joinedAt: Date.now()
+        });
+        
+        // Chỉ giữ lại 10 group gần đây nhất
+        recentGroups = recentGroups.slice(0, 10);
+        
+        chrome.storage.local.set({ recentGroups }, () => {
+          resolve();
+        });
+      });
+    });
+  }
+
+  /**
+   * Render danh sách 3 group gần đây nhất
+   */
+  function renderRecentGroups() {
+    const container = document.getElementById('recent-groups');
+    container.innerHTML = '';
+
+    chrome.storage.local.get(['recentGroups', 'currentGroupId'], (result) => {
+      const recentGroups = result.recentGroups || [];
+      const currentGroup = result.currentGroupId;
+      
+      // Lọc bỏ group hiện tại và chỉ lấy 3 group gần đây nhất
+      const displayGroups = recentGroups
+        .filter(g => g.id !== currentGroup)
+        .slice(0, 3);
+
+      if (displayGroups.length === 0) {
+        container.innerHTML = '<i style="font-size: 12px; color: #999;">Chưa có group nào</i>';
+        return;
+      }
+
+      displayGroups.forEach(group => {
+        const item = document.createElement('div');
+        item.className = 'recent-group-item';
+        
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'group-name';
+        nameSpan.textContent = group.id;
+        nameSpan.title = group.id; // Tooltip để xem full name
+        
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'group-time';
+        timeSpan.textContent = formatTimeAgo(group.joinedAt);
+        
+        item.appendChild(nameSpan);
+        item.appendChild(timeSpan);
+        
+        // Click để tham gia lại group
+        item.onclick = () => {
+          document.getElementById('group-id').value = group.id;
+          // Trigger join group
+          document.getElementById('join-group').click();
+        };
+        
+        container.appendChild(item);
+      });
+    });
+  }
+
+  /**
+   * Format thời gian thành "X phút trước", "X giờ trước", etc.
+   */
+  function formatTimeAgo(timestamp) {
+    const now = Date.now();
+    const diff = now - timestamp;
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+
+    if (minutes < 1) return 'Vừa xong';
+    if (minutes < 60) return `${minutes} phút trước`;
+    if (hours < 24) return `${hours} giờ trước`;
+    if (days < 7) return `${days} ngày trước`;
+    
+    const date = new Date(timestamp);
+    return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
   }
 
   // ========== END SHARED GROUP FUNCTIONS ==========

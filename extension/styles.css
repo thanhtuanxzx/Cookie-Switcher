@@ -160,6 +160,58 @@ button:hover {
   border-bottom-color: #4CAF50;
 }
 
+/* Recent Groups Section */
+.recent-groups-section {
+  background: #fff3e0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffcc80;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.recent-groups-section h3 {
+  color: #f57c00;
+  border-bottom-color: #f57c00;
+}
+
+.recent-group-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 6px;
+  border-left: 3px solid #ff9800;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.recent-group-item:hover {
+  background: #ffe0b2;
+}
+
+.recent-group-item .group-name {
+  flex: 1;
+  font-weight: bold;
+  color: #e65100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.recent-group-item .group-time {
+  font-size: 11px;
+  color: #999;
+  flex: 0 0 auto;
+}
+
 /* Shared Section */
 .shared-section {
   background: #e8f4f8;
